@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fiche Projet - Celia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuBtn = document.getElementById("menuBtn");
+      const circleMenu = document.getElementById("circleMenu");
+      const icon = menuBtn.querySelector("span");
+      const container = document.getElementById("menuContainer");
+
+      // Toggle menu visibility
+      menuBtn.addEventListener("click", () => {
+        circleMenu.classList.toggle("show");
+        icon.textContent = circleMenu.classList.contains("show") ? "-" : "+";
+      });
+
+      // Drag & drop functionality
+      let isDragging = false;
+      let offsetX = 0, offsetY = 0;
+
+      menuBtn.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        offsetX = e.clientX - container.offsetLeft;
+        offsetY = e.clientY - container.offsetTop;
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+          const x = e.clientX - offsetX;
+          const y = e.clientY - offsetY;
+          container.style.left = `${x}px`;
+          container.style.top = `${y}px`;
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+    });
+  </script>
+  <style>
+    :root {
+      --medium: #2D2B2C;
+      --light: #C2A4CE;
+      --dark: #615B66;
+      --accent: #2D2B2C;
+    }
+
+    body {
+      margin: 0;
+      background: #E8D8EB;
+      padding: 0;
+      font-family: 'Outfit', sans-serif;
+      color: var(--dark);
+      scroll-behavior: smooth;
+    }
+
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      text-align: justify;
+    }
+
+    .cursor-follow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 30px;
+      height: 30px;
+      background-color: var(--medium);
+      border: 3px solid var(--light);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+
+
+
+
+    .project-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 60px;
+      max-width: 1400px;
+      margin: 140px auto 80px;
+      padding: 40px;
+    }
+
+    .project-left,
+    .project-right {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+
+    @media(min-width: 900px) {
+      .project-left {
+        flex: 0 0 45%;
+        max-width: 500px;
+      }
+
+      .project-right {
+        flex: 1;
+        padding-left: 20px;
+      }
+    }
+
+    .project-title {
+      font-size: 3rem;
+      color: var(--medium);
+      margin-bottom: 10px;
+      letter-spacing: -0.5px;
+      animation: fadeIn 1.2s ease;
+    }
+
+    .project-date {
+      font-style: italic;
+      font-size: 1rem;
+      margin-bottom: 30px;
+    }
+
+    .carousel {
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      scroll-snap-type: y mandatory;
+      gap: 20px;
+      max-height: 130vh;
+      padding-right: 10px;
+    }
+
+    .carousel img {
+      width: 100%;
+      border-radius: 16px;
+      scroll-snap-align: start;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.4s ease, filter 0.3s ease;
+      cursor: pointer;
+    }
+
+    .carousel img:hover {
+      transform: scale(1.04);
+      filter: brightness(1.1);
+    }
+
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      display: none;
+    }
+
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .project-section {
+      margin-bottom: 40px;
+      animation: fadeInUp 1s ease both;
+    }
+
+    .project-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: var(--medium);
+      border-left: 4px solid var(--accent);
+      padding-left: 12px;
+    }
+
+    .project-section p {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      max-width: 90%;
+    }
+
+    .project-stats .stat-bar {
+      background: #ddd;
+      border-radius: 10px;
+      margin: 0 20px;
+      overflow: hidden;
+      margin-bottom: 15px;
+    }
+
+    .stat-bar span {
+      justify-content: flex-start;
+      display: block;
+      height: 22px;
+      background-color: var(--medium);
+      color: white;
+      text-align: left;
+      padding-left: 10px;
+      line-height: 22px;
+      font-size: 0.9rem;
+    }
+
+    .checkbox-group label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .back-button,
+    .download-button {
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      background-color: var(--medium);
+      padding: 12px 28px;
+      border-radius: 14px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .back-button:hover,
+    .download-button:hover {
+      background-color: var(--dark);
+      transform: translateY(-3px);
+    }
+
+    .project-section.download {
+      background: #615B66;
+      padding: 30px;
+      border-radius: 20px;
+      color: white;
+      text-align: center;
+      max-width: 600px;
+      margin: 60px auto 80px auto;
+      animation: fadeInUp 1.2s ease both;
+    }
+
+    .similar-projects {
+      margin-top: 60px;
+    }
+
+    .similar-projects h2 {
+      font-size: 1.6rem;
+      color: var(--medium);
+      margin-bottom: 20px;
+    }
+
+    .similar-projects .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .similar-projects .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      padding: 20px;
+      flex: 1 1 calc(33% - 20px);
+      min-width: 250px;
+    }
+
+    .similar-projects .card h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--dark);
+    }
+
+    .project-section.download p {
+      font-size: 1rem;
+      margin-bottom: 18px;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <nav class="bg-white bg-opacity-50 backdrop-blur-lg shadow-lg fixed w-full z-10 top-0 left-0 py-2 px-4">
+    <div class="flex justify-between items-center">
+      <!-- Logo déplacé à droite et plus petit -->
+      <div class="text-2xl font-semibold text-gray-800 ml-10">
+        <img src="celia.png" alt="Logo" class="w-32">
+      </div>
+      <!-- Menu hamburger pour mobile -->
+      <div class="lg:hidden flex items-center">
+        <button id="hamburgerBtn" class="text-gray-800 focus:outline-none">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+      <!-- Liens de navigation pour desktop -->
+      <div class="hidden lg:flex space-x-10 text-lg font-medium text-gray-800">
+        <a href="home.html" class="hover:text-[#8B5FA4] transition-colors duration-300">Accueil</a>
+        <a href="projets.html" class="hover:text-[#8B5FA4] transition-colors duration-300">Mon Atelier</a>
+        <a href="test.html" class="hover:text-[#8B5FA4] transition-colors duration-300">Mon Parcours</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Menu hamburger mobile -->
+  <div id="mobileMenu"
+    class="lg:hidden bg-white bg-opacity-90 backdrop-blur-lg shadow-lg fixed top-0 left-0 w-full h-full z-20 hidden">
+    <div class="flex justify-end p-6">
+      <button id="closeMenu" class="text-gray-800 text-3xl">&times;</button>
+    </div>
+    <div class="flex justify-center flex-col items-center space-y-8 text-xl font-medium text-gray-800">
+      <a href="home.html" class="hover:text-blue-500 transition-colors duration-300">Accueil</a>
+      <a href="projets.html" class="hover:text-blue-500 transition-colors duration-300">Mon Atlier</a>
+      <a href="test.html" class="hover:text-blue-500 transition-colors duration-300">Mon Parcours</a>
+    </div>
+  </div>
+
+  <!-- Script pour gérer le menu hamburger -->
+  <script>
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+
+    hamburgerBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    closeMenu.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+  </script>
+
+  <style>
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 70px;
+      background-color: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .navbar img {
+      height: 40px;
+      object-fit: contain;
+    }
+
+    /* Positionner l'iframe de manière fixe sous la navbar */
+    #menu-container {
+      position: fixed;
+      top: 70px;
+      /* Juste sous la navbar */
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      /* L'iframe doit être sous la navbar, mais au-dessus du contenu */
+    }
+
+    #menu-container iframe {
+      width: 100%;
+      height: 100px;
+      /* Ajuste la hauteur de l'iframe selon la taille du menu */
+      border: none;
+    }
+
+    .content {
+      padding-top: 180px;
+      /* Ajoute un espacement pour que le contenu ne soit pas caché par l'iframe */
+    }
+  </style>
+  <!-- <div id="menu-container">
+    <iframe src="menu.html" title="Menu"></iframe>
+  </div> -->
+
+  <div class="cursor-follow" id="cursorFollow"></div>
+
+  <div class="project-layout">
+    <div class="project-left">
+      <h1 class="project-title">PAREIDOLIES</h1>
+      <p class="project-date">Réalisé entre Octobre & Décembre 2024 - Culture Artistique</p>
+      <div class="carousel">
+        <img src="projets/pareidolie.jpg" alt="Page d'accueil" onclick="openLightbox(this.src)">
+        <img src="projets/pareidolie1.jpg" alt="Page d'accueil" onclick="openLightbox(this.src)">
+        <img src="projets/pareidolie2.jpg" alt="Page d'accueil" onclick="openLightbox(this.src)">
+        <img src="projets/pareidolie3.jpg" alt="Page d'accueil" onclick="openLightbox(this.src)">
+        <img src="projets/pareidolie4.jpg" alt="Page d'accueil" onclick="openLightbox(this.src)">
+        <img src="projets/pareidolie5.jpg" alt="Page d'accueil" onclick="openLightbox(this.src)">
+        <img src="projets/pareidolie6.jpg" alt="Page d'accueil" onclick="openLightbox(this.src)">
+      </div>
+    </div>
+
+    <div class="project-right">
+      <br>
+      <br>
+      <div class="project-right"></div>
+      <div class="project-section">
+        <h2>Objetifs</h2>
+        <p>L'objectif de cet exercice était de casser nos réflexes habituels de création, de sortir du blocage de la
+          "feuille blanche" et de lâcher prise. Nous devions laisser libre cours à notre imagination sans chercher à
+          produire un résultat parfait ou abouti. L'exercice consistait à repérer et photographier des pareidolies dans
+          notre environnement quotidien — ces formes ou visages que l'on croit voir dans des objets — puis à réaliser
+          des compositions créatives en détournant des éléments du réel.
+          Le but principal était d'expérimenter, de casser les codes, et d'apprendre à libérer notre processus créatif.
+        </p>
+      </div>
+
+
+      <div class="project-section">
+        <h2>Description</h2>
+        <p>Pour cet exercice, j’ai créé quatre images numériques : un ours, une souris, "La Laitière" revisitée et un
+          personnage inventé, en assemblant différents objets pour former des visages. En parallèle, j'ai photographié
+          des pareidolies repérées dans mon environnement : un visage sur la chaudière, un visage construit avec deux
+          verres et un couvercle, et un visage formé par un carreau de ma cuisine. Ce projet m'a permis d'explorer la
+          frontière entre création et observation spontanée.</p>
+      </div>
+
+      <div class="project-section">
+        <h2>Mon ressenti</h2>
+        <p>Cet exercice a été très difficile pour moi. J’ai tellement tendance à réfléchir, à analyser, que je
+          n'arrivais pas à me laisser aller à la création libre. Cela m'a tellement bloquée que j’en ai pleuré, frustrée
+          par l'impression de ne pas réussir. Je pensais trop, au lieu de laisser simplement mon imagination s’exprimer.
+          Le résultat final ne me convient pas vraiment, mais avec du recul, je sais que cet exercice m'a beaucoup
+          apporté. Il a été pour moi un véritable moment de rétrospection : il m’a obligée à lâcher prise, à accepter
+          l’imperfection et à comprendre qu’il fallait parfois simplement créer sans tout contrôler.
+          Après cet exercice, j'ai réussi à me libérer davantage dans mes autres projets, à mieux comprendre mon style
+          et la façon dont j'aime travailler. Même si ce moment a été difficile, il a marqué un vrai tournant dans ma
+          manière d’aborder la création.</p>
+      </div>
+    </div>
+
+
+  </div>
+  </div>
+
+
+
+  <!-- <div class="project-section project-stats">
+    <h2>Progression personnelle</h2>
+    <div class="stat-bar"><span style="width: 75%; animation: growBar75 3s ease;">Créativité & conception graphique
+        <strong>75%</strong></span></div>
+    <div class="stat-bar"><span style="width: 100%; animation: growBar65 3s ease;">Respect des contraintes
+        <strong>100%</strong></span></div>
+    <div class="stat-bar"><span style="width: 90%; animation: growBar90 3s ease;">Esprit critique et auto-amélioration
+        <strong>90%</strong></span></div>
+    <div class="stat-bar"><span style="width: 80%; animation: growBar90 3s ease;">Technique graphique (Illustrator)
+        <strong>80%</strong></span></div>
+  </div> -->
+
+
+
+  <!-- Rectangle blanc avec opacité 50% sous la section -->
+  <div class="w-full bg-white bg-opacity-50 ">
+    <div class="max-w-7xl mx-auto px-2">
+      <br>
+      <br>
+      <!-- Container centré verticalement et horizontalement -->
+      <div class="project-section checkbox-group flex justify-center items-center gap-40">
+
+        <div>
+          <h2>UE couvert par le Projet</h2>
+          <label><input type="checkbox" checked disabled>EXPRIMER un message par des productions simples</label>
+          <label><input type="checkbox" checked disabled>CONCEVOIR une réponse stratégique</label>
+        </div>
+        <div>
+          <h2>Apprentissages critiques associés</h2>
+          <label><input type="checkbox" checked disabled>AC13.02 — Produire des pistes graphiques et des planches d’inspiration</label>
+          <label><input type="checkbox" checked disabled>AC13.03 — Créer, composer et retoucher des visuels</label>
+          <label><input type="checkbox" checked disabled>AC12.01 — Concevoir un produit ou un service en termes d’usage et de fonctionnalité</label>
+          
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+
+
+  <!-- <div class="project-section download">
+    <h2>Envie d'en savoir plus ?</h2>
+    <p>Tu veux voir l'évolution complète ou explorer les coulisses de ce portfolio ? Télécharge la fiche projet ici :
+    </p>
+    <a href="fiche-projet.pdf" download class="download-button">📄 Télécharger la fiche projet</a>
+  </div> -->
+
+  <div class="project-section similar-projects">
+    <h2>Projets similaires ou précédentes versions</h2>
+    <div class="project-container">
+      <div class="project-card">
+        <img src="italie.jpg" alt="Maquette Figma">
+        <div class="project-text">
+          <h3 style="text-align: center;">Version 1 : Maquette Figma</h3>
+          <p style="text-align: center;">Première vision posée à plat sur Figma. Interface très minimaliste.</p>
+          <a class="cta" href="#" style="text-align: center;">Voir le projet →</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="italie.jpg" alt="Site Bootstrap">
+        <div class="project-text">
+          <h3 style="text-align: center;">Site test avec Bootstrap</h3>
+          <p style="text-align: center;">Une version montée rapidement avec Bootstrap pour tester la structure
+            responsive.</p>
+          <a class="cta" href="#" style="text-align: center;">Voir le projet →</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="italie.jpg" alt="Version sombre">
+        <div class="project-text">
+          <h3 style="text-align: center;">Portfolio alternatif (dark)</h3>
+          <p style="text-align: center;">Une version sombre pensée pour la nuit ou un rendu plus épuré.</p>
+          <a class="cta" href="#" style="text-align: center;">Voir le projet →</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: center;">
+      <a href="projets.html" class="back-button">Retour à l'Atelier</a>
+    </div>
+  </div>
+
+  <style>
+    .project-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 0 20px;
+      margin-bottom: 100px;
+    }
+
+    .project-card {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: 0.5s ease;
+      position: relative;
+      background: var(--medium);
+      color: white;
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: filter 0.3s;
+    }
+
+    .project-card:hover img {
+      filter: grayscale(100%);
+    }
+
+    .project-text {
+      position: absolute;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.9);
+      width: 100%;
+      padding: 10px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      color: var(--dark);
+    }
+
+    .project-card:hover .project-text {
+      opacity: 1;
+    }
+
+    .cta {
+      margin-top: 8px;
+      display: inline-block;
+      font-weight: bold;
+      color: var(--medium);
+      background-color: white;
+      padding: 5px 10px;
+      border-radius: 15px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .cta:hover {
+      background-color: var(--light);
+    }
+  </style>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightboxImg" src="" alt="Zoom image">
+  </div>
+
+  <script>
+    const cursor = document.getElementById('cursorFollow');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = `${e.clientX}px`;
+      cursor.style.top = `${e.clientY}px`;
+    });
+
+    function openLightbox(src) {
+      document.getElementById('lightboxImg').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+  </script>
+
+</body>
+
+</html>

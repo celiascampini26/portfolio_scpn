@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu Cercle</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuBtn = document.getElementById("menuBtn");
+      const circleMenu = document.getElementById("circleMenu");
+      const icon = menuBtn.querySelector("span");
+      const container = document.getElementById("menuContainer");
+
+      // Toggle menu visibility
+      menuBtn.addEventListener("click", () => {
+        circleMenu.classList.toggle("show");
+        icon.textContent = circleMenu.classList.contains("show") ? "-" : "+";
+      });
+
+      // Drag & drop functionality
+      let isDragging = false;
+      let offsetX = 0, offsetY = 0;
+
+      menuBtn.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        offsetX = e.clientX - container.offsetLeft;
+        offsetY = e.clientY - container.offsetTop;
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+          const x = e.clientX - offsetX;
+          const y = e.clientY - offsetY;
+          container.style.left = `${x}px`;
+          container.style.top = `${y}px`;
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+    });
+  </script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+
+    .menu-container {
+      position: fixed;
+      left: 90%;
+      top: 80%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+      transition: left 0.3s ease, top 0.3s ease;
+    }
+
+    .menu-button {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: #e5e5e5;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      position: relative;
+      z-index: 10000;
+      transition: transform 0.2s ease;
+    }
+
+    .menu-button span {
+      font-size: 28px;
+      color: #333;
+    }
+
+    .circle-menu {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background-color: rgba(229, 229, 229, 0.3);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .circle-menu.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .circle-menu a {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 8px 14px;
+      border-radius: 12px;
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.4s ease;
+    }
+
+    .circle-menu.show a {
+      opacity: 1;
+    }
+
+    /* Positions des éléments du menu circulaire */
+    .circle-menu a:nth-child(1) { top: 10%; left: 50%; }
+    .circle-menu a:nth-child(2) { top: 25%; left: 85%; }
+    .circle-menu a:nth-child(3) { top: 75%; left: 85%; }
+    .circle-menu a:nth-child(4) { top: 90%; left: 50%; }
+    .circle-menu a:nth-child(5) { top: 75%; left: 15%; }
+    .circle-menu a:nth-child(6) { top: 25%; left: 15%; }
+
+    /* Responsivité */
+    @media screen and (max-width: 600px) {
+      .circle-menu {
+        width: 150px;
+        height: 150px;
+      }
+      .menu-button {
+        width: 50px;
+        height: 50px;
+      }
+      .menu-button span {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="menu-container" id="menuContainer">
+    <div class="menu-button" id="menuBtn">
+      <span><i class="bx bx-menu">+</i></span>
+    </div>
+    <div class="circle-menu" id="circleMenu">
+      <a href="#">Accueil</a>
+      <a href="#">Projets</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+      <a href="#">À propos</a>
+      <a href="#">FAQ</a>
+    </div>
+  </div>
+
+</body>
+
+</html>

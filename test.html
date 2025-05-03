@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline Interactive</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Mise en page générale */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #615B66;
+        }
+
+        /* Section de la timeline */
+        .timeline-section {
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .timeline-title {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #E8D8EB;
+        }
+
+        /* Conteneur de la timeline */
+        .timeline-container {
+            position: relative;
+            padding-left: 30px;
+            border-left: 4px solid #E8D8EB;
+        }
+
+        /* Élément de la timeline */
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 30px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -8px;
+            width: 16px;
+            height: 16px;
+            background-color: #E8D8EB;
+            border-radius: 50%;
+            /* box-shadow: 0 0 0 3px white; */
+            transition: transform 0.3s ease-in-out;
+        }
+
+
+        /* Animation pour la timeline */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .timeline-item:hover .timeline-content {
+            transform: scale(1.05);
+        }
+
+        .timeline-item:hover:before {
+            transform: scale(1.2);
+        }
+
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f2;
+} */
+
+.container {
+    text-align: center;
+    position: relative;
+}
+
+.large-text {
+    font-size: 170px;
+    font-weight: bold;
+    color: #564666;
+    opacity: 0;
+    animation: fadeInLarge 2s forwards;
+}
+
+.small-text {
+    font-size: 50px;
+    color: #E8D8EB;
+    opacity: 0;
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: fadeInSmall 1s 1s forwards;
+}
+
+@keyframes fadeInLarge {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInSmall {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="large-text">MON PARCOURS</h1>
+        <p class="small-text">En constante évolution.</p>
+    </div>
+
+    <section class="timeline-section">
+        <script src="script.js"></script>
+
+        <div class="timeline-container">
+            <div class="timeline-item" data-year="2025">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3 style="color: #E8D8EB;">Brevet</h3>
+                    <p style="color: #E8D8EB;">Spécialisation en communication digitale, création numérique et web design.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-year="2024">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3 style="color: #E8D8EB;">Baccalauréat - sciences et technologies de l'industrie et du développement durable (STI2D) <br>+
+                        option Architecture & Construction <br>+ option Art Plastique</h3>
+                    <p style="color: #E8D8EB;">Lancement d’une entreprise familiale pour offrir des services de stratégie de communication et de
+                        gestion d’entreprise.</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-year="2024">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3 style="color: #E8D8EB;">Bachelor universitaire de technologie (BUT) - Métier du multimédia et de l'internet (MMI)</h3>
+                    <p style="color: #E8D8EB;">en cours...</p>
+                </div>
+            </div>
+            <div class="timeline-item" data-year="2023">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3 style="color: #E8D8EB;">Licence - Information de la communication</h3>
+                    <p style="color: #E8D8EB;">en cours...</p>
+                </div>
+            </div>
+        </div>
+        <p style="color: #E8D8EB;">Mon parcours avance à toute vitesse, prêt à relever de nouveaux défis !</p>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

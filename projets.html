@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --medium: #2D2B2C;
+      --light: #C2A4CE;
+      --dark: #615B66;
+      --accent: #2D2B2C;
+    }
+
+    body {
+      margin: 0;
+      background: #E8D8EB;
+      font-family: 'Outfit', sans-serif;
+      color: var(--dark);
+      scroll-behavior: smooth;
+    }
+
+    .flip-card {
+      perspective: 1000px;
+      transition: transform 0.5s ease;
+    }
+
+    .flip-inner {
+      transition: transform 0.6s ease;
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-front,
+    .flip-back {
+      backface-visibility: hidden;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 1rem;
+    }
+
+    .flip-front {
+      background-color: var(--light);
+      color: var(--medium);
+    }
+
+    .flip-back {
+      background-color: var(--dark);
+      color: white;
+      transform: rotateY(180deg);
+    }
+
+    .btn-custom {
+      background-color: var(--accent);
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-custom:hover {
+      background-color: var(--light);
+      color: var(--medium);
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    svg {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      pointer-events: none;
+      z-index: 1000;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    }
+  </style>
+</head>
+
+<body class="relative">
+
+  <!-- Navbar -->
+  <nav class="bg-white/50 backdrop-blur fixed w-full z-50 px-6 py-4 flex justify-between items-center shadow">
+    <img src="celia.png" alt="Logo" class="h-10" />
+    <div class="md:flex hidden gap-6 text-base">
+      <a href="home.html" class="hover:text-[var(--light)] transition">Accueil</a>
+      <a href="projets.html" class="hover:text-[var(--light)] transition">Projets</a>
+      <a href="contact.html" class="hover:text-[var(--light)] transition">Contact</a>
+    </div>
+    <div class="md:hidden">
+      <button id="menu-toggle">
+        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Menu Mobile -->
+  <div id="menu"
+    class="fixed top-0 left-0 w-full h-full bg-white/90 backdrop-blur-md flex-col justify-center items-center hidden z-40">
+    <div class="flex flex-col gap-8 text-2xl font-semibold text-center pt-40">
+      <a href="home.html" class="hover:text-[var(--light)]" onclick="hideMenu()">Accueil</a>
+      <a href="projets.html" class="hover:text-[var(--light)]" onclick="hideMenu()">Projets</a>
+      <a href="contact.html" class="hover:text-[var(--light)]" onclick="hideMenu()">Contact</a>
+    </div>
+  </div>
+
+  <br><br><br><br><br>
+  <div class="max-w-4xl mx-auto text-center">
+    <h1 id="typewriter" class="text-3xl md:text-5xl font-light leading-snug whitespace-pre-line"></h1>
+  </div>
+
+  <script>
+    // Effet machine à écrire pour le titre
+    const typeText = "Bienvenue dans mon atelier,\nun espace où mes idées prennent vie.";
+    const typewriter = document.getElementById("typewriter");
+    let i = 0;
+
+    function writeLetter() {
+      if (i < typeText.length) {
+        typewriter.innerHTML += typeText[i] === "\n" ? "<br>" : typeText[i];
+        i++;
+        setTimeout(writeLetter, 40); // vitesse d'écriture
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", writeLetter);
+
+  </script>
+
+
+
+
+  <!-- Filtres -->
+  <div class="pt-16 max-w-6xl mx-auto p-4 fade-up">
+    <div class="flex flex-wrap justify-center gap-4 mb-10">
+      <button
+        class="filter-btn border border-[var(--light)] text-[var(--medium)] hover:bg-[var(--light)] hover:text-white transition px-5 py-2 rounded-full"
+        data-filter="all">Tous</button>
+      <button
+        class="filter-btn border border-[var(--light)] text-[var(--medium)] hover:bg-[var(--light)] hover:text-white transition px-5 py-2 rounded-full"
+        data-filter="affiche">Affiche</button>
+      <button
+        class="filter-btn border border-[var(--light)] text-[var(--medium)] hover:bg-[var(--light)] hover:text-white transition px-5 py-2 rounded-full"
+        data-filter="logo">Logo</button>
+      <button
+        class="filter-btn border border-[var(--light)] text-[var(--medium)] hover:bg-[var(--light)] hover:text-white transition px-5 py-2 rounded-full"
+        data-filter="exercice">Exercice</button>
+        <button
+        class="filter-btn border border-[var(--light)] text-[var(--medium)] hover:bg-[var(--light)] hover:text-white transition px-5 py-2 rounded-full"
+        data-filter="sae">SAE</button>
+    </div>
+
+    <!-- Projets -->
+    <div id="projets" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script>
+    const menu = document.getElementById('menu');
+    const toggleBtn = document.getElementById('menu-toggle');
+    toggleBtn.addEventListener('click', () => menu.classList.toggle('hidden'));
+    function hideMenu() { menu.classList.add('hidden'); }
+
+    const projets = [
+      { image: 'projets/ACD.jpg', titre: 'ACD MMI', description: 'Site vitrine responsive.', categorie: 'affiche', lien: 'ACD.html' },
+      { image: 'projets/Aphrodite4.png', titre: 'Identité Visuelle', description: 'Création graphique complète.', categorie: 'design', lien: 'aphrodite.html' },
+      { image: 'projets/citation.png', titre: 'Citation Visuelle', description: 'Affiche typographique.', categorie: 'affiche', lien: 'citation.html' },
+      { image: 'projets/pareidolie.jpg', titre: 'Pareidolie', description: 'Exercice visuel et conceptuel.', categorie: 'exercice', lien: 'pareidolie.html' },
+      { image: 'projets/ppcc.png', titre: 'PPCC', description: 'Portfolio créatif complet.', categorie: 'web', lien: 'ppcc.html' },
+      { image: 'projets/school.png', titre: 'École Montessori', description: 'Logo et charte graphique.', categorie: 'logo', lien: 'school.html' },
+      { image: 'projets/soulmate.png', titre: 'Soulmate', description: 'Affiche artistique.', categorie: 'affiche', lien: 'soulmate.html' },
+      { image: 'projets/hogei7.png', titre: 'ACD MMI', description: 'Site vitrine responsive.', categorie: 'logo', lien: 'logo_hogei.html' },
+      { image: 'projets/hogei8.png', titre: 'ACD MMI', description: 'Site vitrine responsive.', categorie: 'sae', lien: 'hogei.html' },
+    ];
+
+    const projetsContainer = document.getElementById('projets');
+    projets.forEach(projet => {
+      projetsContainer.innerHTML += `
+        <div class="flip-card project-item w-56 h-56 relative" data-category="${projet.categorie}">
+          <div class="flip-inner w-full h-full relative">
+            <div class="flip-front overflow-hidden rounded-xl shadow-xl">
+              <img src="${projet.image}" alt="${projet.titre}" class="w-full h-full object-cover rounded-xl">
+            </div>
+            <div class="flip-back flex flex-col items-center justify-center text-center shadow-xl p-4">
+              <h4 class="text-lg font-semibold mb-2">${projet.titre}</h4>
+              <p class="text-sm mb-4">${projet.description}</p>
+              <a href="${projet.lien}" class="btn-custom mt-2">Voir plus</a>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        document.querySelectorAll('.project-item').forEach(item => {
+          item.classList.toggle('hidden', filter !== 'all' && item.dataset.category !== filter);
+        });
+      });
+    });
+
+    // Animation on scroll
+    window.addEventListener('scroll', () => {
+      document.querySelectorAll('.fade-up').forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < window.innerHeight - 100) el.classList.add('show');
+      });
+    });
+  </script>
+   <?xml version="1.0" encoding="UTF-8"?>
+   <svg id="Celia" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 841.89 595.28">
+     <defs>
+       <style>
+         .cls-1 {
+           fill: #a580b7;
+         }
+   
+         .cls-2 {
+           fill: #2d2b2c;
+         }
+   
+         .cls-3 {
+           fill: #8b5fa4;
+         }
+       </style>
+     </defs>
+     <g id="corps">
+       <ellipse class="cls-3" cx="420.39" cy="299.01" rx="368.26" ry="267.96"/>
+       <path class="cls-2" d="M197.65,405.74c-.24,0-.48,0-.72,0-52.01-.22-90.12-23.17-108.21-36.83-38.52-29.09-56.3-66.11-64.44-92.04-6.34-20.2-21.19-67.52,2.54-115.69,7.63-15.49,25.38-43.68,58.5-58.39,5.58-2.48,17.18-7.63,62.29-9.4,33.53-1.31,57.76-2.26,88.11,2.29,50.7,7.6,113.79,17.05,140.18,65.29h0c15.4,28.16,11.1,56.54,7.31,81.58-11.11,73.29-63.21,116.24-73.54,124.1-42.31,32.23-84.14,39.08-112.02,39.08ZM187.65,103.21c-12.26,0-25.04.5-39.6,1.07-43.02,1.68-53.72,6.44-58.29,8.47-29.98,13.32-46.17,39.08-53.15,53.26-21.81,44.26-7.87,88.66-1.92,107.62,7.66,24.41,24.39,59.25,60.61,86.61,17.01,12.84,52.84,34.42,101.69,34.63.22,0,.45,0,.67,0,26.19,0,65.52-6.45,105.42-36.85,9.75-7.42,58.89-47.94,69.37-117.07,3.54-23.34,7.54-49.79-6.09-74.73h0c-23.79-43.5-83.93-52.51-132.25-59.75-16.36-2.45-31-3.25-46.46-3.25Z"/>
+       <circle class="cls-2" cx="244.49" cy="245.1" r="91.93"/>
+       <path class="cls-2" d="M126.88,243.98c.67-44.26,27.95-88.68,69.69-105.64,56.05-23.7,126.88,2.36,150.59,59.27,5.77,13.65,9.23,28.29,9.72,43.02-5.09-62.05-54.34-107.64-116.61-107.41-61.97-.8-109.33,50.58-113.39,110.76h0Z"/>
+       <path class="cls-2" d="M114.6,174.76c12.14-.56,29.08-.19,41.31-.24,12.28.05,29.1-.34,41.31.24-13.16,5.1-27.28,6.94-41.31,7.01-14.03-.08-28.15-1.92-41.31-7.01h0Z"/>
+       <path class="cls-2" d="M133.58,143.5c27.73,14.97,54.58,20.55,85.97,18.98-28.6,12.3-65.32,4.44-85.97-18.98h0Z"/>
+       <path class="cls-2" d="M154.8,115.59c12.84,10.47,26.52,18.87,42.11,24.06,15.53,5.07,31.61,9.09,47.58,13.53-8.42.75-16.89.23-25.25-1-25.45-3.27-50.76-13.65-64.45-36.59h0Z"/>
+       <path class="cls-2" d="M642.9,405.74c-27.88,0-69.7-6.85-112.02-39.08-10.33-7.86-62.43-50.82-73.54-124.1-3.8-25.04-8.1-53.42,7.31-81.58h0c26.39-48.24,89.48-57.7,140.18-65.29,30.35-4.55,54.57-3.6,88.11-2.29,45.11,1.76,56.71,6.92,62.29,9.4,33.12,14.71,50.87,42.9,58.5,58.39,23.73,48.17,8.88,95.48,2.54,115.69-8.14,25.93-25.92,62.94-64.44,92.04-18.09,13.66-56.2,36.61-108.21,36.83-.24,0-.48,0-.72,0ZM474.2,166.21c-13.64,24.94-9.63,51.39-6.1,74.72,10.48,69.14,59.63,109.65,69.37,117.07,39.91,30.39,79.24,36.85,105.43,36.85.22,0,.45,0,.67,0,48.86-.2,84.69-21.78,101.7-34.63,36.22-27.35,52.95-62.2,60.61-86.61,5.95-18.96,19.88-63.36-1.92-107.62-6.98-14.17-23.17-39.94-53.15-53.26-4.57-2.03-15.27-6.79-58.29-8.47-32.93-1.29-56.73-2.22-86.07,2.18-48.32,7.24-108.45,16.25-132.25,59.75h0Z"/>
+       <circle class="cls-2" cx="596.06" cy="245.1" r="91.93"/>
+       <path class="cls-2" d="M713.67,243.98c-4.07-60.21-51.4-111.55-113.39-110.76-62.27-.24-111.54,45.39-116.61,107.41.79-22.12,7.93-44.16,20.52-62.47,29.76-43.57,91.52-60.34,139.79-39.82,41.74,16.96,69.03,61.38,69.69,105.64h0Z"/>
+       <path class="cls-2" d="M725.95,174.76c-13.16,5.09-27.28,6.93-41.31,7.01-14.03-.07-28.15-1.91-41.31-7.01,12.14-.58,29.08-.2,41.31-.24,12.28.06,29.1-.32,41.31.24h0Z"/>
+       <path class="cls-2" d="M706.97,143.5c-20.65,23.42-57.37,31.28-85.97,18.98,31.4,1.57,58.25-4.02,85.97-18.98h0Z"/>
+       <path class="cls-2" d="M685.76,115.59c-13.7,22.96-38.99,33.32-64.45,36.59-8.36,1.22-16.82,1.75-25.25,1,15.97-4.43,32.05-8.45,47.58-13.53,15.59-5.19,29.27-13.59,42.11-24.06h0Z"/>
+       <path class="cls-2" d="M456.75,211.96c-4.06-3.9-18.95-16.55-40.55-15.71-15.82.63-27.21,8.15-32.6,12.57l-4.61-5.61c6.09-5,18.97-13.5,36.91-14.21,24.47-.97,41.29,13.32,45.87,17.73l-5.03,5.23Z"/>
+       <path class="cls-2" d="M394.23,299.36l-6.95-2.07c4.18-14.01,17.31-23.59,31.24-22.68,11.36.71,21.65,8.31,26.2,19.36l-6.71,2.77c-3.51-8.5-11.33-14.34-19.95-14.88-10.56-.65-20.61,6.7-23.84,17.51Z"/>
+       <path class="cls-2" d="M419.33,459.78c-25.87,0-45.41-16.86-53.45-33.93-8.08-17.15-6.66-37.89-1.24-48.68,2.1-4.18,4.69-6.61,7.71-7.22h0c4.95-1,7.86,3.14,10.93,7.53,3.15,4.5,7.46,10.67,15.56,15.18,12.26,6.83,28.19,7.69,39.63,2.14,9.67-4.69,14.39-13.12,17.84-19.27,3-5.35,5.85-10.42,11.15-9.51,2.73.46,5.12,2.48,7.11,6,5.67,10.02,7.47,30.72.69,48.03-7.52,19.16-27.15,38.87-54.07,39.7-.62.02-1.25.03-1.86.03ZM373.69,377.09c-.4.18-1.41,1.03-2.58,3.38-3.97,7.95-6.17,26.32,1.34,42.28,7.22,15.33,25.04,30.46,48.52,29.74,23.62-.73,40.89-18.16,47.54-35.1,5.79-14.76,4.48-32,.31-40.73-1.04-2.18-1.97-3.11-2.4-3.4-.93.76-2.56,3.66-3.76,5.81-3.7,6.6-9.29,16.57-21,22.25-13.47,6.54-32.09,5.61-46.34-2.33-9.56-5.33-14.63-12.57-17.98-17.37-1.21-1.72-2.84-4.06-3.65-4.54ZM373.07,373.5l.72,3.56h0l-.72-3.56Z"/>
+       <path class="cls-2" d="M420.3,433.18c-1.74,0-3.51-.21-5.3-.64-6.26-1.5-11.84-5.57-14.92-10.89-4.27-7.36-3.84-16.77,1.11-24.55l6.12,3.9c-3.49,5.49-3.86,12.01-.96,17.02,2.1,3.63,5.96,6.42,10.33,7.47,3.78.91,7.42.39,10.24-1.44,3.04-1.97,5.15-5.47,5.78-9.58.73-4.78-.66-9.71-3.81-13.53l5.59-4.62c4.47,5.42,6.44,12.44,5.39,19.26-.95,6.16-4.23,11.47-9.01,14.57-3.1,2.01-6.74,3.04-10.58,3.04Z"/>
+     </g>
+     <circle id="pupille2" class="cls-1" cx="244.49" cy="249.03" r="28.28"/>
+     <circle id="pupille1" class="cls-1" cx="598.67" cy="245.1" r="28.28"/>
+   </svg>
+
+ <!-- 👇 Script pour faire bouger les pupilles -->
+ <script>
+   const pupilles = [
+     document.getElementById("pupille1"),
+     document.getElementById("pupille2")
+   ];
+
+   document.addEventListener("mousemove", (e) => {
+     pupilles.forEach(p => {
+       const rect = p.getBoundingClientRect();
+       const dx = e.clientX - (rect.left + rect.width / 2);
+       const dy = e.clientY - (rect.top + rect.height / 2);
+       const angle = Math.atan2(dy, dx);
+       const dist = 30;
+       const x = Math.cos(angle) * dist;
+       const y = Math.sin(angle) * dist;
+       p.setAttribute("transform", `translate(${x}, ${y})`);
+     });
+   });
+ </script>
+</body>
+
+</html>

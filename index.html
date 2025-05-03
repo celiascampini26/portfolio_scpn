@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mon Site Web</title>
+  <link rel="icon" href="h.png" type="image/png" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #2D2B2C;
+      overflow: hidden;
+    }
+
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: #2D2B2C;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    svg {
+      width: 80vw;
+      max-width: 700px;
+      height: auto;
+    }
+
+    path {
+      stroke: #C2A4CE;
+      fill: none;
+      stroke-width: 2;
+      stroke-dasharray: 3000;
+      stroke-dashoffset: 3000;
+      animation: draw 4s ease-in-out forwards,
+                 fillIn 1.5s ease-in-out 4s forwards;
+    }
+
+    @keyframes draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes fillIn {
+      to {
+        fill: #E8D8EB;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo animé visible jusqu’à redirection -->
+  <div class="preloader">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 424.62 201.77">
+      <!-- Remplace ce path par l'intégralité de ton logo -->
+      <path d="M212.98,115.24l6.31-.11c-1.04-11.3-4.57-20.64-10.6-27.99...Z" />
+      <path d="M194.68,53.59c-.95,0-1.83.49-2.34,1.29...Z" />
+      <path d="M246.1,174.37h-27.71c-.53,0-.79-.23-.79-.69...Z" />
+    </svg>
+  </div>
+
+  <script>
+    window.addEventListener("load", function () {
+      setTimeout(() => {
+        window.location.href = 'home.html';
+      }, 6000); // laisse le logo visible jusqu’à redirection
+    });
+  </script>
+
+</body>
+</html>

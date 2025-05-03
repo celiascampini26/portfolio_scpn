@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Futura:wght@400&display=swap');
+
+        .container {
+            width: 100%;
+            max-width: 600px; /* Ajustez cette valeur selon la largeur souhaitée */
+            height: 50px; /* Ajustez cette valeur selon la hauteur souhaitée */
+            border: 3px solid #1D1D1B;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            background-color: transparent;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajout de l'ombre */
+        }
+        .scrolling-text {
+            position: absolute;
+            width: 100%;
+            animation: scroll 18s linear infinite;
+            font-family: 'Futura', sans-serif;
+            font-size: 20px;
+            color: #1D1D1B;
+        }
+        @keyframes scroll {
+            0% { top: 100%; }
+            100% { top: -900%; } /* Ajustez cette valeur selon le nombre de lignes */
+        }
+        .scrolling-text p {
+            margin: 0;
+            height: 50px; /* Ajustez cette valeur selon la hauteur souhaitée */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="scrolling-text">
+            <p>L’humain avant tout</p>
+            <p>L’amélioration continue comme ADN</p>
+            <p>Un impact mesurable et durable</p>
+            <p>L’excellence sans complexité</p>
+            <p>L’engagement</p>
+            <p>La transparence et la pédagogie</p>
+            <p>L’agilité comme moteur de réussite</p>
+            <p>Un équilibre entre performance et bien-être</p>
+            <p>Un partenariat sur le long terme</p>
+        </div>
+    </div>
+</body>
+</html>

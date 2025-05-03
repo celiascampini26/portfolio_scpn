@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accueil - Celia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --medium: #2D2B2C;
+      --light: #C2A4CE;
+      --dark: #615B66;
+      --accent: #2D2B2C;
+    }
+    body {
+      margin: 0;
+      background: #E8D8EB;
+      font-family: 'Outfit', sans-serif;
+      color: var(--dark);
+      scroll-behavior: smooth;
+    }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-scroll {
+      display: inline-flex;
+      animation: scroll 25s linear infinite;
+    }
+  </style>
+</head>
+
+<body class="relative">
+
+  <!-- Navbar -->
+  <nav class="bg-white/50 backdrop-blur fixed w-full z-50 px-6 py-4 flex justify-between items-center shadow">
+    <img src="celia.png" alt="Logo" class="h-10" />
+    <div class="md:flex hidden gap-6 text-base">
+      <a href="home.html" class="hover:text-[var(--light)] transition">Accueil</a>
+      <a href="projets.html" class="hover:text-[var(--light)] transition">Projets</a>
+      <a href="contact.html" class="hover:text-[var(--light)] transition">Contact</a>
+    </div>
+    <div class="md:hidden">
+      <button id="menu-toggle">
+        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Menu mobile -->
+  <div id="menu" class="hidden fixed top-0 left-0 w-full h-full bg-white/80 backdrop-blur-md flex flex-col items-center justify-center z-40 space-y-8 text-2xl font-semibold">
+    <a href="home.html" class="hover:text-[var(--light)]" onclick="hideMenu()">Accueil</a>
+    <a href="projets.html" class="hover:text-[var(--light)]" onclick="hideMenu()">Projets</a>
+    <a href="contact.html" class="hover:text-[var(--light)]" onclick="hideMenu()">Contact</a>
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+    toggleBtn.addEventListener('click', () => menu.classList.toggle('hidden'));
+    function hideMenu() { menu.classList.add('hidden'); }
+  </script>
+
+  <!-- Hero Section -->
+  <section class="flex flex-col items-center justify-center min-h-screen pt-28 text-center px-4">
+    <h1 class="text-4xl md:text-5xl font-bold text-[var(--medium)] mb-4">Bienvenue dans mon univers créatif</h1>
+    <p class="text-lg md:text-xl max-w-2xl mb-6 text-[var(--dark)]">Graphiste, Webdesigner et créatrice d'univers visuels uniques. Découvrez mon monde et mes projets.</p>
+    <a href="projets.html" class="bg-[var(--medium)] hover:bg-[var(--light)] text-white font-bold py-3 px-6 rounded-full transition">Découvrir mes projets</a>
+  </section>
+
+  
+  <!-- Section Avis
+<section class="py-20 bg-[#E8D8EB] px-6 flex justify-center items-center">
+    <div class="relative w-full max-w-xl bg-white/80 p-6 rounded-3xl shadow-lg overflow-hidden">
+      <div id="carousel" class="transition-all duration-300">
+        <div class="avis text-center">
+          <p class="text-lg font-medium text-gray-700">“Un travail incroyable, créatif et très professionnel. Je recommande à 100 % !”</p>
+          <div class="mt-4 text-sm text-gray-500">— Camille Dupont, 12 mars 2025</div>
+        </div>
+        <div class="avis hidden text-center">
+          <p class="text-lg font-medium text-gray-700">“Une vraie vision artistique. Le projet a dépassé mes attentes.”</p>
+          <div class="mt-4 text-sm text-gray-500">— Julien Moretti, 3 avril 2025</div>
+        </div>
+        <div class="avis hidden text-center">
+          <p class="text-lg font-medium text-gray-700">“Disponible, à l’écoute, et un rendu super soigné. Merci !”</p>
+          <div class="mt-4 text-sm text-gray-500">— Sarah M., 24 avril 2025</div>
+        </div>
+      </div> -->
+  
+      <!-- Flèches -->
+      <div class="absolute top-1/2 -translate-y-1/2 left-4">
+        <button onclick="changeAvis(-1)" class="text-3xl text-gray-500 hover:text-[var(--light)]">‹</button>
+      </div>
+      <div class="absolute top-1/2 -translate-y-1/2 right-4">
+        <button onclick="changeAvis(1)" class="text-3xl text-gray-500 hover:text-[var(--light)]">›</button>
+      </div>
+    </div>
+  </section>
+  
+  <script>
+    let index = 0;
+    const avis = document.querySelectorAll('.avis');
+    function changeAvis(direction) {
+      avis[index].classList.add('hidden');
+      index = (index + direction + avis.length) % avis.length;
+      avis[index].classList.remove('hidden');
+    }
+  </script>
+  
+
+  <!-- Carrousel Logiciels -->
+  <section class="flex items-center justify-center py-10">
+    <div class="w-full max-w-6xl bg-gray-50 bg-opacity-50 p-6 rounded-3xl shadow-lg overflow-hidden">
+      <div class="animate-scroll whitespace-nowrap">
+        <img src="logo/ae.png" alt="AE" class="inline-block w-20 h-20 mx-4 object-contain">
+        <img src="logo/ai.png" alt="AI" class="inline-block w-20 h-20 mx-4 object-contain">
+        <img src="logo/id.png" alt="ID" class="inline-block w-20 h-20 mx-4 object-contain">
+        <img src="logo/pr.png" alt="PR" class="inline-block w-20 h-20 mx-4 object-contain">
+        <img src="logo/ps.png" alt="PS" class="inline-block w-20 h-20 mx-4 object-contain">
+        <img src="logo/creative.png" alt="Creative" class="inline-block w-20 h-20 mx-4 object-contain">
+        <img src="logo/canva.webp" alt="Canva" class="inline-block w-20 h-20 mx-4 object-contain">
+        <img src="logo/figma.png" alt="Figma" class="inline-block w-20 h-20 mx-4 object-contain">
+        <img src="logo/vs.png" alt="VS Code" class="inline-block w-20 h-20 mx-4 object-contain">
+        <img src="logo/xampp.png" alt="XAMPP" class="inline-block w-20 h-20 mx-4 object-contain">
+        <img src="logo/word.png" alt="Word" class="inline-block w-20 h-20 mx-4 object-contain">
+        <img src="logo/excel.png" alt="Excel" class="inline-block w-20 h-20 mx-4 object-contain">
+        
+        <!-- Boucle infinie -->
+        <img src="logo/ae.png" alt="AE" class="inline-block w-20 h-20 mx-4 object-contain">
+        <img src="logo/ai.png" alt="AI" class="inline-block w-20 h-20 mx-4 object-contain">
+        <img src="logo/id.png" alt="ID" class="inline-block w-20 h-20 mx-4 object-contain">
+      </div>
+    </div>
+  </section>
+
+  <!-- À propos rapide -->
+  <section class="py-20 bg-white/70 text-center px-6">
+    <h2 class="text-3xl md:text-4xl font-bold text-[var(--medium)] mb-6">Qui suis-je ?</h2>
+    <p class="max-w-3xl mx-auto text-lg text-[var(--dark)]">
+      Passionnée par la création graphique et le design d'interfaces, je construis des projets avec exigence et émotion. Chaque pixel compte pour transmettre des histoires visuelles fortes, modernes et adaptées.
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 text-[var(--dark)] text-sm">
+    © 2025 Celia Scampini – Tous droits réservés
+  </footer>
+
+</body>
+</html>
