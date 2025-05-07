@@ -138,7 +138,7 @@
       overflow-y: auto;
       scroll-snap-type: y mandatory;
       gap: 20px;
-      max-height: 130vh;
+      max-height: 100vh;
       padding-right: 10px;
     }
 
@@ -316,173 +316,73 @@
 
 
 
-  <nav class="bg-white bg-opacity-50 backdrop-blur-lg shadow-lg fixed w-full z-10 top-0 left-0 py-2 px-4">
-    <div class="flex justify-between items-center">
-      <!-- Logo déplacé à droite et plus petit -->
-      <div class="text-2xl font-semibold text-gray-800 ml-10">
-        <img src="celia.png" alt="Logo" class="w-32">
-      </div>
-      <!-- Menu hamburger pour mobile -->
-      <div class="lg:hidden flex items-center">
-        <button id="hamburgerBtn" class="text-gray-800 focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
+  <nav class="bg-white/50 backdrop-blur fixed w-full z-50 px-6 py-4 flex justify-between items-center shadow">
+    <img src="celia.png" alt="Logo" class="h-10" />
+    <div class="md:flex hidden gap-6 text-base">
+        <a href="home.html" class="hover:text-[#C2A4CE] transition">Accueil</a>
+        <a href="projets.html" class="hover:text-[#C2A4CE] transition">Projets</a>
+        <a href="#footer" class="hover:text-[#C2A4CE] transition">Contact</a>
+    </div>
+    <div class="md:hidden">
+        <button id="menu-toggle">
+            <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
         </button>
-      </div>
-      <!-- Liens de navigation pour desktop -->
-      <div class="hidden lg:flex space-x-10 text-lg font-medium text-gray-800">
-        <a href="home.html" class="hover:text-[#8B5FA4] transition-colors duration-300">Accueil</a>
-        <a href="projets.html" class="hover:text-[#8B5FA4] transition-colors duration-300">Mon Atelier</a>
-        <a href="test.html" class="hover:text-[#8B5FA4] transition-colors duration-300">Mon Parcours</a>
-      </div>
     </div>
   </nav>
 
-  <!-- Menu hamburger mobile -->
-  <div id="mobileMenu"
-    class="lg:hidden bg-white bg-opacity-90 backdrop-blur-lg shadow-lg fixed top-0 left-0 w-full h-full z-20 hidden">
-    <div class="flex justify-end p-6">
-      <button id="closeMenu" class="text-gray-800 text-3xl">&times;</button>
-    </div>
-    <div class="flex justify-center flex-col items-center space-y-8 text-xl font-medium text-gray-800">
-      <a href="home.html" class="hover:text-blue-500 transition-colors duration-300">Accueil</a>
-      <a href="projets.html" class="hover:text-blue-500 transition-colors duration-300">Mon Atlier</a>
-      <a href="test.html" class="hover:text-blue-500 transition-colors duration-300">Mon Parcours</a>
+  <!-- ✅ Menu mobile (inchangé) -->
+  <div id="menu" class="fixed top-0 left-0 w-full h-full bg-white/90 backdrop-blur-md flex-col justify-center items-center hidden z-40">
+    <div class="flex flex-col gap-8 text-2xl font-semibold text-center pt-40">
+        <a href="home.html" class="hover:text-[#C2A4CE]" onclick="hideMenu()">Accueil</a>
+        <a href="projets.html" class="hover:text-[#C2A4CE]" onclick="hideMenu()">Projets</a>
+        <a href="#" class="hover:text-[#C2A4CE]" onclick="hideMenu()">Contact</a>
     </div>
   </div>
-
-  <!-- Script pour gérer le menu hamburger -->
-  <script>
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const closeMenu = document.getElementById('closeMenu');
-
-    hamburgerBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-
-    closeMenu.addEventListener('click', () => {
-      mobileMenu.classList.add('hidden');
-    });
-  </script>
-
-  <style>
-    .navbar {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      height: 70px;
-      background-color: rgba(255, 255, 255, 0.85);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
-
-    .navbar img {
-      height: 40px;
-      object-fit: contain;
-    }
-
-    /* Positionner l'iframe de manière fixe sous la navbar */
-    #menu-container {
-      position: fixed;
-      top: 70px;
-      /* Juste sous la navbar */
-      left: 0;
-      width: 100%;
-      z-index: 999;
-      /* L'iframe doit être sous la navbar, mais au-dessus du contenu */
-    }
-
-    #menu-container iframe {
-      width: 100%;
-      height: 100px;
-      /* Ajuste la hauteur de l'iframe selon la taille du menu */
-      border: none;
-    }
-
-    .content {
-      padding-top: 180px;
-      /* Ajoute un espacement pour que le contenu ne soit pas caché par l'iframe */
-    }
-  </style>
-  <!-- <div id="menu-container">
-    <iframe src="menu.html" title="Menu"></iframe>
-  </div> -->
 
   <div class="cursor-follow" id="cursorFollow"></div>
 
   <div class="project-layout">
     <div class="project-left">
-      <h1 class="project-title">AFFICHE - CITATION HELEN KELLER</h1>
-      <p class="project-date">Réalisé entre Octobre 2024 - Culture Artistique</p>
+      <h1 class="project-title">AFFICHE ACD MMI</h1>
+      <p class="project-date">Réalisé en Mars 2025 - Culture Artistique</p>
       <div class="carousel">
-        <img src="citation.png" alt="Page d'accueil" onclick="openLightbox(this.src)">
-        <img src="citation1.png" alt="Page d'accueil" onclick="openLightbox(this.src)">
+        <img src="" alt="Page d'accueil" onclick="openLightbox(this.src)">
+        <img src="" alt="Page d'accueil" onclick="openLightbox(this.src)">
+        <img src="" alt="Page d'accueil" onclick="openLightbox(this.src)">
+        <img src="" alt="Page d'accueil" onclick="openLightbox(this.src)">
+
       </div>
     </div>
 
     <div class="project-right">
+      <a class="back-button">Badge</a>
+
       <br>
       <br>
+
       <div class="project-right"></div>
-      <a href="ppcc1.jpg" class="back-button">« Tout a ses merveilles, l’obscurité et le silence aussi » Helen
-        Keller</a>
-      <br>
-      <br>
       <div class="project-section">
         <h2>Objetifs</h2>
-        <p>Nous devions choisir une citation parmi une liste proposée par notre professeur, puis en réaliser une
-          illustration personnelle. L'objectif était de traduire visuellement le sens profond de la citation, sans se
-          contenter d’une simple mise en image littérale, mais en créant une interprétation sensible et originale. Le
-          projet devait nous pousser à exprimer des émotions, à casser les approches classiques, et à explorer de
-          nouvelles façons de représenter des idées abstraites.</p>
+        <p>texte</p>
       </div>
 
 
       <div class="project-section">
         <h2>Description</h2>
-        <p>Pour illustrer la citation d’Helen Keller, j'ai choisi de représenter une statue de marbre inspirée d’elle
-          avec l'aide d'une IA,
-          plongée dans l’obscurité. Des fissures colorées éclatent depuis l’intérieur de la statue, symbolisant la
-          richesse intérieure et les merveilles cachées malgré l'absence de perception sensorielle.
-          J'ai ajouté du bruit visuel pour évoquer la sensation que l’on perçoit quand on ferme les yeux, et je me suis
-          inspirée de références comme Ratatouille, Soul, et le phénomène de synesthésie pour accentuer l'idée d'une
-          explosion intérieure de sensations. La typographie que j'ai créée à la plume prolonge cette subtilité en
-          apportant légèreté et émotion au visuel.</p>
+        <p>texte</p>
       </div>
 
       <div class="project-section">
         <h2>Mon ressenti</h2>
-        <p>Ce projet m’a profondément marquée. La citation d’Helen Keller a résonné en moi et m'a inspirée une approche
-          très émotionnelle. J'ai aimé chercher à représenter ce qui ne se voit pas ni ne s’entend, mais qui se ressent
-          profondément.
-          Cet exercice m'a permis de mieux comprendre l'importance de travailler avec l’invisible, de laisser plus de
-          place à l'émotion brute dans mes créations, et d'oser casser les standards classiques. C’est un projet où je
-          me suis sentie alignée avec ce que je voulais transmettre, à la fois dans le fond et dans la forme.</p>
+        <p>texte</p>
       </div>
     </div>
 
 
   </div>
   </div>
-
-
-
-  <!-- <div class="project-section project-stats">
-    <h2>Progression personnelle</h2>
-    <div class="stat-bar"><span style="width: 75%; animation: growBar75 3s ease;">Créativité & conception graphique
-        <strong>75%</strong></span></div>
-    <div class="stat-bar"><span style="width: 100%; animation: growBar65 3s ease;">Respect des contraintes
-        <strong>100%</strong></span></div>
-    <div class="stat-bar"><span style="width: 90%; animation: growBar90 3s ease;">Esprit critique et auto-amélioration
-        <strong>90%</strong></span></div>
-    <div class="stat-bar"><span style="width: 80%; animation: growBar90 3s ease;">Technique graphique (Illustrator)
-        <strong>80%</strong></span></div>
-  </div> -->
 
 
 
@@ -491,26 +391,21 @@
     <div class="max-w-7xl mx-auto px-2">
       <br>
       <br>
-      <!-- Container centré verticalement et horizontalement -->
-      <div class="project-section checkbox-group flex justify-center items-center gap-40">
-
-        <div>
-          <h2>UE couvert par le Projet</h2>
-          <label><input type="checkbox" checked disabled>EXPRIMER un message par des productions simples</label>
+        <!-- Container centré verticalement et horizontalement -->
+        <div class="project-section checkbox-group flex justify-center items-center gap-40">
+          
+          <div>
+                <h2>UE couvert par le Projet</h2>
+                <label><input type="checkbox" checked disabled>  UE</label>
+            </div>
+            <div>
+                <h2>Apprentissages critiques associés</h2>
+                <label><input type="checkbox" checked disabled>AC</label>
+            </div>
         </div>
-        <div>
-          <h2>Apprentissages critiques associés</h2>
-          <label><input type="checkbox" checked disabled>AC13.02 — Produire des pistes graphiques et des planches
-            d’inspiration</label>
-          <label><input type="checkbox" checked disabled>AC13.03 — Créer, composer et retoucher des visuels</label>
-          <label><input type="checkbox" checked disabled>AC13.06 — Optimiser les médias en fonction de leurs usages et
-            supports de diffusion</label>
-
-        </div>
-      </div>
-      <br>
+        <br>
     </div>
-  </div>
+</div>
 
 
   <!-- <div class="project-section download">
@@ -524,27 +419,28 @@
     <h2>Projets similaires ou précédentes versions</h2>
     <div class="project-container">
       <div class="project-card">
-        <img src="ppcc1.jpg" alt="Maquette Figma">
+        <img src="italie.jpg" alt="Maquette Figma">
         <div class="project-text">
-          <h3 style="text-align: center;">PANPAN CULCUL</h3>
-          <p style="text-align: center;">Ensemble d'élement de communication pour un groupe fictif de disco</p>
-          <a class="cta" href="ppcc.html" style="text-align: center;">Voir le projet →</a>
+          <h3 style="text-align: center;">Version 1 : Maquette Figma</h3>
+          <p style="text-align: center;">Première vision posée à plat sur Figma. Interface très minimaliste.</p>
+          <a class="cta" href="#" style="text-align: center;">Voir le projet →</a>
         </div>
       </div>
       <div class="project-card">
-        <img src="pareidolie.jpg" alt="Site Bootstrap">
+        <img src="italie.jpg" alt="Site Bootstrap">
         <div class="project-text">
-          <h3 style="text-align: center;">PAREIDOLIES</h3>
-          <p style="text-align: center;">Construction de pareidolie et prise de photo</p>
-          <a class="cta" href="pareidolie.html" style="text-align: center;">Voir le projet →</a>
+          <h3 style="text-align: center;">Site test avec Bootstrap</h3>
+          <p style="text-align: center;">Une version montée rapidement avec Bootstrap pour tester la structure
+            responsive.</p>
+          <a class="cta" href="#" style="text-align: center;">Voir le projet →</a>
         </div>
       </div>
       <div class="project-card">
-        <img src="ACD3.png" alt="Version sombre">
+        <img src="italie.jpg" alt="Version sombre">
         <div class="project-text">
-          <h3 style="text-align: center;">ACD MMI</h3>
-          <p style="text-align: center;">Affiche pour le Rassemblement des chef de département de MMI</p>
-          <a class="cta" href="ACD.html" style="text-align: center;">Voir le projet →</a>
+          <h3 style="text-align: center;">Portfolio alternatif (dark)</h3>
+          <p style="text-align: center;">Une version sombre pensée pour la nuit ou un rendu plus épuré.</p>
+          <a class="cta" href="#" style="text-align: center;">Voir le projet →</a>
         </div>
       </div>
     </div>
