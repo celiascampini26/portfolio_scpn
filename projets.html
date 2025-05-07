@@ -98,31 +98,37 @@
 
   <!-- Navbar -->
   <nav class="bg-white/50 backdrop-blur fixed w-full z-50 px-6 py-4 flex justify-between items-center shadow">
-    <img src="celia.png" alt="Logo" class="h-10" />
+    <img href="home.html" src="celia.png" alt="Logo" class="h-10" />
     <div class="md:flex hidden gap-6 text-base">
-      <a href="home.html" class="hover:text-[var(--light)] transition">Accueil</a>
-      <a href="projets.html" class="hover:text-[var(--light)] transition">Projets</a>
-      <a href="contact.html" class="hover:text-[var(--light)] transition">Contact</a>
+        <a href="home.html" class="hover:text-[#C2A4CE] transition">Accueil</a>
+        <a href="projets.html" class="hover:text-[#C2A4CE] transition">Projets</a>
+        <a href="home.html#footer" class="hover:text-[#C2A4CE] transition">Contact</a>
     </div>
     <div class="md:hidden">
-      <button id="menu-toggle">
-        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
+        <button id="menu-toggle">
+            <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+        </button>
     </div>
-  </nav>
+</nav>
 
-  <!-- Menu Mobile -->
-  <div id="menu"
+<!-- Menu Mobile -->
+<div id="menu"
     class="fixed top-0 left-0 w-full h-full bg-white/90 backdrop-blur-md flex-col justify-center items-center hidden z-40">
     <div class="flex flex-col gap-8 text-2xl font-semibold text-center pt-40">
-      <a href="home.html" class="hover:text-[var(--light)]" onclick="hideMenu()">Accueil</a>
-      <a href="projets.html" class="hover:text-[var(--light)]" onclick="hideMenu()">Projets</a>
-      <a href="contact.html" class="hover:text-[var(--light)]" onclick="hideMenu()">Contact</a>
+        <a href="home.html" class="hover:text-[#C2A4CE]" onclick="hideMenu()">Accueil</a>
+        <a href="projets.html" class="hover:text-[#C2A4CE]" onclick="hideMenu()">Projets</a>
+        <a href="home.html#footer" class="hover:text-[#C2A4CE]" onclick="hideMenu()">Contact</a>
     </div>
-  </div>
+</div>
 
+<script>
+    // Duplicate declarations removed
+
+    toggleBtn.addEventListener("click", () => menu.classList.toggle("hidden"));
+    function hideMenu() { menu.classList.add("hidden"); }
+</script>
   <br><br><br><br><br>
   <div class="max-w-4xl mx-auto text-center">
     <h1 id="typewriter" class="text-3xl md:text-5xl font-light leading-snug whitespace-pre-line"></h1>
@@ -182,15 +188,15 @@
     function hideMenu() { menu.classList.add('hidden'); }
 
     const projets = [
-      { image: 'projets/ACD.jpg', titre: 'ACD MMI', description: 'Site vitrine responsive.', categorie: 'affiche', lien: 'ACD.html' },
-      { image: 'projets/Aphrodite4.png', titre: 'Identité Visuelle', description: 'Création graphique complète.', categorie: 'design', lien: 'aphrodite.html' },
-      { image: 'projets/citation.png', titre: 'Citation Visuelle', description: 'Affiche typographique.', categorie: 'affiche', lien: 'citation.html' },
-      { image: 'projets/pareidolie.jpg', titre: 'Pareidolie', description: 'Exercice visuel et conceptuel.', categorie: 'exercice', lien: 'pareidolie.html' },
-      { image: 'projets/ppcc.png', titre: 'PPCC', description: 'Portfolio créatif complet.', categorie: 'web', lien: 'ppcc.html' },
-      { image: 'projets/school.png', titre: 'École Montessori', description: 'Logo et charte graphique.', categorie: 'logo', lien: 'school.html' },
-      { image: 'projets/soulmate.png', titre: 'Soulmate', description: 'Affiche artistique.', categorie: 'affiche', lien: 'soulmate.html' },
-      { image: 'projets/hogei7.png', titre: 'ACD MMI', description: 'Site vitrine responsive.', categorie: 'logo', lien: 'logo_hogei.html' },
-      { image: 'projets/hogei8.png', titre: 'ACD MMI', description: 'Site vitrine responsive.', categorie: 'sae', lien: 'hogei.html' },
+      { image: 'ACD.jpg', titre: 'ACD MMI', description: 'Site vitrine responsive.', categorie: 'affiche', lien: 'ACD.html' },
+      { image: 'Aphrodite4.png', titre: 'Identité Visuelle', description: 'Création graphique complète.', categorie: 'design', lien: 'aphrodite.html' },
+      { image: 'citation.png', titre: 'Citation Visuelle', description: 'Affiche typographique.', categorie: 'affiche', lien: 'citation.html' },
+      { image: 'pareidolie.jpg', titre: 'Pareidolie', description: 'Exercice visuel et conceptuel.', categorie: 'exercice', lien: 'pareidolie.html' },
+      { image: 'ppcc.png', titre: 'PPCC', description: 'Portfolio créatif complet.', categorie: 'web', lien: 'ppcc.html' },
+      { image: 'school.png', titre: 'École Montessori', description: 'Logo et charte graphique.', categorie: 'logo', lien: 'school.html' },
+      { image: 'soulmate.png', titre: 'Soulmate', description: 'Affiche artistique.', categorie: 'affiche', lien: 'soulmate.html' },
+      { image: 'hogei7.png', titre: 'ACD MMI', description: 'Site vitrine responsive.', categorie: 'logo', lien: 'logo_hogei.html' },
+      { image: 'hogei8.png', titre: 'ACD MMI', description: 'Site vitrine responsive.', categorie: 'sae', lien: 'hogei.html' },
     ];
 
     const projetsContainer = document.getElementById('projets');

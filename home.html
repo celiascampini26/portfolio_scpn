@@ -16,83 +16,63 @@
 
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
 
-        .container-1 {
-            height: 250vh;
-            position: relative;
-            background: #E8D8EB;
-        }
+.container-1 {
+    height: 250vh;
+    position: relative;
+    background: #E8D8EB;
+}
 
-        .image-wrapper {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            height: 100vh;
-            overflow: hidden;
-        }
+.image-wrapper {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
 
-        .image-wrapper img {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scaleY(1);
-            height: 100vh;
-            width: 100vw;
-            max-width: none;
-            object-fit: cover;
-            transition: clip-path 0.1s ease-out, filter 0.3s ease-out;
-            clip-path: inset(45% 0% 45% 0%);
-            filter: blur(0px) brightness(1);
-            background-color: #E8D8EB;
-        }
+.image-wrapper img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scaleY(1);
+    height: 100vh;
+    width: 100vw;
+    max-width: none;
+    object-fit: cover;
+    transition: clip-path 0.1s ease-out, filter 0.3s ease-out;
+    clip-path: inset(45% 0% 45% 0%);
+    filter: blur(0px) brightness(1);
+    background-color: #E8D8EB;
+}
 
-        .overlay-text {
-            position: sticky;
-            top: 50%;
-            transform: translateY(-50%);
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            text-align: center;
-            width: 100%;
-            z-index: 10;
-        }
+.overlay-text {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+    z-index: 10;
+    pointer-events: none;
+}
 
-        .overlay-text h1 {
-            font-size: 2.5rem;
-            color: white;
-            font-weight: 600;
-            margin: 0;
-            letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-        }
+.overlay-text img {
+    display: block;
+    max-width: 90%;
+}
 
-        .overlay-text h2 {
-            font-size: 1.5rem;
-            color: #ffffffcc;
-            font-weight: 300;
-            margin: 10px 0 0 0;
-            letter-spacing: 1px;
-        }
+@media (min-width: 768px) {
+    .overlay-text img:first-child {
+        width: 60%;
+    }
 
-        @media (min-width: 768px) {
-            .overlay-text h1 {
-                font-size: 4rem;
-            }
-
-            .overlay-text h2 {
-                font-size: 2rem;
-            }
-        }
-
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .fade-in-up.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .overlay-text img:last-child {
+        width: 40%;
+    }
+}
     </style>
 </head>
 
@@ -104,7 +84,7 @@
         <div class="md:flex hidden gap-6 text-base">
             <a href="home.html" class="hover:text-[#C2A4CE] transition">Accueil</a>
             <a href="projets.html" class="hover:text-[#C2A4CE] transition">Projets</a>
-            <a href="contact.html" class="hover:text-[#C2A4CE] transition">Contact</a>
+            <a href="#footer" class="hover:text-[#C2A4CE] transition">Contact</a>
         </div>
         <div class="md:hidden">
             <button id="menu-toggle">
@@ -121,26 +101,49 @@
         <div class="flex flex-col gap-8 text-2xl font-semibold text-center pt-40">
             <a href="home.html" class="hover:text-[#C2A4CE]" onclick="hideMenu()">Accueil</a>
             <a href="projets.html" class="hover:text-[#C2A4CE]" onclick="hideMenu()">Projets</a>
-            <a href="contact.html" class="hover:text-[#C2A4CE]" onclick="hideMenu()">Contact</a>
+            <a href="#" class="hover:text-[#C2A4CE]" onclick="hideMenu()">Contact</a>
         </div>
     </div>
 
     <!-- Hero Scroll Section -->
     <section class="container-1">
         <div class="image-wrapper">
-            <img id="scroll-img" src="projets/home.png" alt="Image">
+            <img id="scroll-img" src="home.png" alt="Image">
         </div>
         <div class="overlay-text" id="overlay-text">
-            <h1 class="group hover:tracking-wide transition-all duration-300">
-                <span class="inline-block relative">
-                    Portfolio
-                    <span
-                        class="absolute left-0 bottom-0 w-0 h-[3px] bg-[#C2A4CE] transition-all duration-500 group-hover:w-full"></span>
-                </span>
-            </h1>
-            <h2>Célia Scampini</h2>
+            <img src="portfolio.png" alt="Titre Portfolio" class="mb-6" />
+            <img src="Plan de travail 21.png" alt="Célia Scampini" />
         </div>
     </section>
+
+    <script>
+        const img = document.getElementById("scroll-img");
+        const text = document.getElementById("overlay-text");
+
+        window.addEventListener("scroll", () => {
+            const scrollTop = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const section = document.querySelector(".container-1");
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+
+            const progress = Math.min(Math.max((scrollTop - sectionTop) / (windowHeight * 0.8), 0), 1);
+
+            const insetTopBottom = 45 - progress * 45;
+            img.style.clipPath = `inset(${insetTopBottom}% 0% ${insetTopBottom}% 0%)`;
+
+            const opacityValue = 1 - 0.5 * progress;
+            img.style.opacity = `${opacityValue}`;
+
+            if (progress >= 0.35 && scrollTop < sectionTop + sectionHeight - windowHeight) {
+                text.style.opacity = 1;
+                text.style.transform = `translateY(${(progress - 0.35) * 80}px)`;
+            } else {
+                text.style.opacity = 0;
+            }
+        });
+    </script>
+
 
     <section class="w-full bg-[#2D2B2C] text-white px-6 py-20">
         <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
@@ -152,16 +155,33 @@
                     <h2
                         class="text-4xl md:text-5xl font-semibold group hover:tracking-wide transition-all duration-300">
                         <span class="inline-block relative">
-                            $1
+                            Le calme avant la création
                             <span
                                 class="absolute left-0 bottom-0 w-0 h-[3px] bg-[#C2A4CE] transition-all duration-500 group-hover:w-full"></span>
                         </span>
                     </h2>
-                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mt-4">
-                        Étudiante en MMI & InfoCom, passionnée par le design, le web, la photographie et la stratégie de
-                        communication. J’aime créer des expériences visuelles uniques, transmettre des émotions à
-                        travers des
-                        images et accompagner des marques à révéler leur identité.
+                    <p class="text-justify text-lg md:text-xl text-gray-300 leading-relaxed mt-4"
+                        style="text-align: justify;"></p>
+                    Je suis <strong>Célia</strong>, et chaque projet commence pour moi par un instant suspendu, un
+                    horizon tranquille.
+                    Mon identité se dessine <strong> entre ciel et mer</strong>, dans ce calme où naît l'inspiration,
+                    une brise venue du
+                    large que je laisse s’élever jusqu’aux nuages.<br>
+
+                    Tiraillée entre <strong>rêve et lucidité</strong>, j’ai la tête pleine de visions et les pieds bien
+                    ancrés pour les
+                    réaliser. Curieuse, rigoureuse, je mêle esthétique et stratégie, portée par une intuition affûtée et
+                    une méthode agile.<br>
+
+                    Mon savoir-faire s'exprime à travers le design graphique, le webdesign, la création digitale et la
+                    stratégie de communication.<strong> J’aime donner vie aux projets</strong> avec passion et
+                    précision.<br>
+
+                    Aujourd’hui, je vous <strong>invite à découvrir mon univers</strong>. Que vous soyez client, école
+                    ou recruteur,
+                    <strong>parcourons ensemble ce portfolio</strong> et faisons naître, entre ciel et mer, de nouvelles
+                    idées.
+                    </p>
                     </p>
                     <div class="flex flex-wrap gap-4 mt-6">
                         <span
@@ -195,61 +215,60 @@
                             <h4
                                 class="text-xl font-semibold text-[#C2A4CE] group hover:tracking-wide transition-all duration-300">
                                 <span class="inline-block relative">
-                                    2019
+                                    BUT MMI – 2ᵉ année (en cours)
                                     <span
                                         class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#C2A4CE] transition-all duration-500 group-hover:w-full"></span>
                                 </span>
                             </h4>
-                            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mt-4">Brevet des collèges obtenu
-                                avec mention Bien.</p>
+                            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mt-4">📍 Université de Corte –
+                                Parcours Création Numérique<br>
+
+                                Formation polyvalente en webdesign, design graphique, création de contenu, UX/UI et
+                                gestion de projet digital.<br>Stage de deux mois aux seins de l'agence Studio 42°9.
+                            </p>
                         </div>
                         <div class="fade-in-up">
                             <h4
                                 class="text-xl font-semibold text-[#C2A4CE] group hover:tracking-wide transition-all duration-300">
                                 <span class="inline-block relative">
-                                    2019
+                                    Licence 2 Information – Communication (en cours)
                                     <span
                                         class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#C2A4CE] transition-all duration-500 group-hover:w-full"></span>
                                 </span>
                             </h4>
-                            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mt-4">Bac STI2D mention Bien –
-                                spécialité architecture & construction, option arts plastiques.</p>
+                            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mt-4">📍 Faculté de Corte –
+                                Candidate libre dans le cadre d’un double cursus<br>
+
+                                Approfondissement des sciences de l’information et de la communication : sémiotique,
+                                médias, stratégies numériques et culture visuelle.</p>
                         </div>
                         <div class="fade-in-up">
                             <h4
                                 class="text-xl font-semibold text-[#C2A4CE] group hover:tracking-wide transition-all duration-300">
                                 <span class="inline-block relative">
-                                    2019
+                                    Baccalauréat STI2D – Option Architecture & Construction
                                     <span
                                         class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#C2A4CE] transition-all duration-500 group-hover:w-full"></span>
                                 </span>
                             </h4>
-                            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mt-4">Début du BUT MMI – Création
-                                Numérique.</p>
+                            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mt-4">📍Lycée Paul (Montesoro) –
+                                Avec mention – Option Arts plastiques<br>
+
+                                Approche technique du design et de l’espace, combinée à une sensibilité artistique.</p>
                         </div>
                         <div class="fade-in-up">
                             <h4
                                 class="text-xl font-semibold text-[#C2A4CE] group hover:tracking-wide transition-all duration-300">
                                 <span class="inline-block relative">
-                                    2019
+                                    Brevet des collèges
                                     <span
                                         class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#C2A4CE] transition-all duration-500 group-hover:w-full"></span>
                                 </span>
                             </h4>
-                            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mt-4">Double cursus avec une
-                                Licence en Info-Com.</p>
-                        </div>
-                        <div class="fade-in-up">
-                            <h4
-                                class="text-xl font-semibold text-[#C2A4CE] group hover:tracking-wide transition-all duration-300">
-                                <span class="inline-block relative">
-                                    2019
-                                    <span
-                                        class="absolute left-0 bottom-0 w-0 h-[2px] bg-[#C2A4CE] transition-all duration-500 group-hover:w-full"></span>
-                                </span>
-                            </h4>
-                            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mt-4">Je poursuis les deux
-                                formations pour développer mes compétences en design et communication.</p>
+                            <p class="text-lg md:text-xl text-gray-300 leading-relaxed mt-4">📍 Collège Campo Vallone –
+                                Biguglia
+                                <br>Obtenu avec Mention Bien
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -259,7 +278,7 @@
             <!-- Colonne droite : image sticky -->
             <div class="relative">
                 <div class="sticky top-24">
-                    <img src="projets/moi.png" alt="Photo de Célia"
+                    <img src="moi.png" alt="Photo de Célia"
                         class="w-full md:w-[300px] h-auto object-cover rounded-xl shadow-2xl border-4 border-white mx-auto" />
                 </div>
             </div>
@@ -288,18 +307,18 @@
                 </span>
             </h2>
             <p class="text-gray-600 text-lg md:text-xl leading-relaxed">
-                Une sélection de projets qui reflètent mon style, mes compétences et mon envie de créer avec sens.
+                Une sélection de qui reflètent mon style, mes compétences et mon envie de créer avec sens.
                 Graphisme, web, communication : laissez-vous guider dans un univers à mon image.
             </p>
 
             <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                <img src="projets/ACD3.png" alt="Projet 1"
+                <img src="ACD3.png" alt="Projet 1"
                     class="rounded-xl w-full h-56 object-cover hover:scale-105 transition duration-300" />
-                <img src="projets/Aphrodite4.png" alt="Projet 2"
+                <img src="Aphrodite4.png" alt="Projet 2"
                     class="rounded-xl w-full h-56 object-cover hover:scale-105 transition duration-300" />
-                <img src="projets/citation1.png" alt="Projet 3"
+                <img src="citation1.png" alt="Projet 3"
                     class="rounded-xl w-full h-56 object-cover hover:scale-105 transition duration-300" />
-                <img src="projets/ppcc3.jpg" alt="Projet 4"
+                <img src="ppcc3.jpg" alt="Projet 4"
                     class="rounded-xl w-full h-56 object-cover hover:scale-105 transition duration-300" />
             </div>
 
@@ -326,7 +345,7 @@
     </script>
 
     <!-- Section Avis -->
-    <section class="bg-[#fdfbff] py-20 px-6 fade-in-up">
+    <section class="bg-[#E8D8EB] py-20 px-6 fade-in-up">
         <div class="max-w-4xl mx-auto text-center">
             <p class="text-[#615B66] uppercase tracking-widest text-sm md:text-base mb-4">Ils m'ont accompagnée</p>
             <h2
@@ -334,9 +353,10 @@
                 <span class="inline-block relative">
                     Avis professionnels
                     <span
-                        class="absolute left-0 bottom-0 w-0 h-[3px] bg-[#C2A4CE] transition-all duration-500 group-hover:w-full"></span>
+                        class="absolute left-0 bottom-0 w-0 h-[3px] bg-[#E8D8EB] transition-all duration-500 group-hover:w-full"></span>
                 </span>
             </h2>
+
             <div class="overflow-hidden relative w-full">
                 <div class="flex animate-marquee-slow gap-8 w-max group hover:[animation-play-state:paused]">
                     <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition min-w-[300px] max-w-[350px]">
@@ -377,117 +397,110 @@
     </section>
 
     <!-- Section Outils -->
-    <section class="bg-white py-20 px-6 fade-in-up">
+    <section class="bg-[#E8D8EB] py-20 px-6 fade-in-up">
         <div class="max-w-6xl mx-auto text-center">
-            <p class="text-[#615B66] uppercase tracking-widest text-sm md:text-base mb-4">Mes outils du quotidien</p>
-            <h2
-                class="text-3xl md:text-5xl font-bold text-[#2D2B2C] mb-12 group hover:tracking-wide transition-all duration-300">
-                <span class="inline-block relative">
-                    Les logiciels avec lesquels je crée
-                    <span
-                        class="absolute left-0 bottom-0 w-0 h-[3px] bg-[#C2A4CE] transition-all duration-500 group-hover:w-full"></span>
-                </span>
-            </h2>
-            <div class="overflow-hidden">
-                <div class="flex items-center gap-16 animate-marquee whitespace-nowrap">
-                    <img src="logo/ae.png" alt="Photoshop"
-                        class="h-20 w-auto object-contain grayscale hover:grayscale-0 transition duration-300" />
-                    <img src="logo/ai.png" alt="Illustrator"
-                        class="h-20 w-auto object-contain grayscale hover:grayscale-0 transition duration-300" />
-                    <img src="logo/id.png" alt="Figma"
-                        class="h-20 w-auto object-contain grayscale hover:grayscale-0 transition duration-300" />
-                    <img src="logo/pr.png" alt="WordPress"
-                        class="h-20 w-auto object-contain grayscale hover:grayscale-0 transition duration-300" />
-                    <img src="logo/ps.png" alt="Canva"
-                        class="h-20 w-auto object-contain grayscale hover:grayscale-0 transition duration-300" />
-                    <img src="logo/creative.png" alt="Photoshop"
-                        class="h-20 w-auto object-contain grayscale hover:grayscale-0 transition duration-300" />
-                    <img src="logo/figma.png" alt="Illustrator"
-                        class="h-20 w-auto object-contain grayscale hover:grayscale-0 transition duration-300" />
-                    <img src="logo/canva.webp" alt="WordPress"
-                        class="h-20 w-auto object-contain grayscale hover:grayscale-0 transition duration-300" />
-                    <img src="logo/vs.png" alt="Canva"
-                        class="h-20 w-auto object-contain grayscale hover:grayscale-0 transition duration-300" />
-                    <img src="logo/html.png" alt="Figma"
-                        class="h-20 w-auto object-contain grayscale hover:grayscale-0 transition duration-300" />
-                    <img src="logo/css.png" alt="WordPress"
-                        class="h-20 w-auto object-contain grayscale hover:grayscale-0 transition duration-300" />
-                    <img src="logo/js.png" alt="Canva"
-                        class="h-20 w-auto object-contain grayscale hover:grayscale-0 transition duration-300" />
-                    <img src="logo/w.png" alt="Figma"
-                        class="h-20 w-auto object-contain grayscale hover:grayscale-0 transition duration-300" />
-                    <img src="logo/word.png" alt="WordPress"
-                        class="h-20 w-auto object-contain grayscale hover:grayscale-0 transition duration-300" />
-                    <img src="logo/excel.png" alt="Canva"
-                        class="h-20 w-auto object-contain grayscale hover:grayscale-0 transition duration-300" />
+            <p class="text-[#615B66] uppercase tracking-widest text-sm md:text-base mb-4">
+                Les outils qui m’accompagnent chaque jour
+            </p>
+            <div class="mt-10 overflow-hidden">
+                <div class="flex items-center gap-10 animate-marquee w-max">
+                    <img src="ae.png" alt="After Effects"
+                        class="h-20 object-contain grayscale hover:grayscale-0 transition duration-300" />
+                    <img src="ai.png" alt="Illustrator"
+                        class="h-20 object-contain grayscale hover:grayscale-0 transition duration-300" />
+                    <img src="id.png" alt="InDesign"
+                        class="h-20 object-contain grayscale hover:grayscale-0 transition duration-300" />
+                    <img src="pr.png" alt="Premiere Pro"
+                        class="h-20 object-contain grayscale hover:grayscale-0 transition duration-300" />
+                    <img src="ps.png" alt="Photoshop"
+                        class="h-20 object-contain grayscale hover:grayscale-0 transition duration-300" />
+                    <img src="creative.png" alt="Creative Cloud"
+                        class="h-20 object-contain grayscale hover:grayscale-0 transition duration-300" />
+                    <img src="figma.png" alt="Figma"
+                        class="h-20 object-contain grayscale hover:grayscale-0 transition duration-300" />
+                    <img src="canva.webp" alt="Canva"
+                        class="h-20 object-contain grayscale hover:grayscale-0 transition duration-300" />
+                    <img src="vs.png" alt="VS Code"
+                        class="h-20 object-contain grayscale hover:grayscale-0 transition duration-300" />
+                    <img src="html.png" alt="HTML"
+                        class="h-20 object-contain grayscale hover:grayscale-0 transition duration-300" />
+                    <img src="css.png" alt="CSS"
+                        class="h-20 object-contain grayscale hover:grayscale-0 transition duration-300" />
+                    <img src="js.png" alt="JavaScript"
+                        class="h-20 object-contain grayscale hover:grayscale-0 transition duration-300" />
+                    <img src="w.png" alt="WordPress"
+                        class="h-20 object-contain grayscale hover:grayscale-0 transition duration-300" />
+                    <img src="word.png" alt="Word"
+                        class="h-20 object-contain grayscale hover:grayscale-0 transition duration-300" />
+                    <img src="excel.png" alt="Excel"
+                        class="h-20 object-contain grayscale hover:grayscale-0 transition duration-300" />
                 </div>
             </div>
-
-            <style>
-                @keyframes marquee {
-                    0% {
-                        transform: translateX(0);
-                    }
-
-                    100% {
-                        transform: translateX(-50%);
-                    }
-                }
-
-                .animate-marquee {
-                    animation: marquee 30s linear infinite;
-                }
-            </style>
         </div>
+        <style>
+            @keyframes marquee {
+                0% {
+                    transform: translateX(0);
+                }
+
+                100% {
+                    transform: translateX(-50%);
+                }
+            }
+
+            .animate-marquee {
+                animation: marquee 40s linear infinite;
+            }
+        </style>
     </section>
 
-    <script>
-        const img = document.getElementById("scroll-img");
-        const text = document.getElementById("overlay-text");
-        const menu = document.getElementById("menu");
-        const toggleBtn = document.getElementById("menu-toggle");
 
-        toggleBtn.addEventListener("click", () => menu.classList.toggle("hidden"));
-        function hideMenu() { menu.classList.add("hidden"); }
+    <style>
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
 
-        window.addEventListener("scroll", () => {
-            const scrollTop = window.scrollY;
-            const windowHeight = window.innerHeight;
-            const start = 0;
-            const end = windowHeight * 1.5;
-            const progress = Math.min(Math.max((scrollTop - start) / (end - start), 0), 1);
+            100% {
+                transform: translateX(-50%);
+            }
+        }
 
-            const insetTopBottom = 45 - progress * 45;
-            img.style.clipPath = `inset(${insetTopBottom}% 0% ${insetTopBottom}% 0%)`;
+        .animate-marquee {
+            animation: marquee 30s linear infinite;
+            width: max-content;
+        }
+    </style>
+    </div>
+    </section>
 
-            const opacityValue = 1 - 0.5 * progress;
-            img.style.opacity = `${opacityValue}`;
-            text.style.opacity = progress > 0.2 ? Math.min((progress - 0.2) / 0.3, 1) : 0;
-
-            document.querySelectorAll('.fade-in-up').forEach(el => {
-                const top = el.getBoundingClientRect().top;
-                if (top < window.innerHeight - 100) {
-                    el.classList.add('show');
-                }
-            });
-        });
-    </script>
-    <footer class="bg-[#2D2B2C] text-white text-center py-10 px-4 mt-20">
-        <div class="flex justify-center gap-6 mb-4">
-            <a href="https://www.instagram.com/toncompte" target="_blank">
-                <img src="logos/instagram.svg" alt="Instagram"
-                    class="w-6 h-6 hover:scale-110 hover:brightness-125 transition duration-300" />
+    
+    <footer id="footer" class="bg-[#2D2B2C] text-white text-center py-10 px-4 mt-20">
+        <div class="flex flex-col md:flex-row justify-center items-center gap-6 mb-6 text-sm md:text-base">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/scampini_design/" target="_blank"
+                class="flex items-center gap-2 hover:brightness-125 transition">
+                <img src="insta.png" alt="Instagram" class="w-6 h-6 hover:scale-110 transition duration-300" />
+                <span>@scampini_design</span>
             </a>
-            <a href="mailto:tonmail@example.com">
-                <img src="logos/mail.svg" alt="Email" class="w-6 h-6 hover:scale-110 transition" />
+
+            <!-- Email -->
+            <a href="mailto:scampinicelia@gmail.com" class="flex items-center gap-2 hover:brightness-125 transition">
+                <img src="envelope-solid-24.png" alt="Email" class="w-6 h-6 hover:scale-110 transition" />
+                <span>scampinicelia@gmail.com</span>
             </a>
-            <a href="tel:+33612345678">
-                <img src="logos/phone.svg" alt="Téléphone" class="w-6 h-6 hover:scale-110 transition" />
+
+            <!-- Téléphone -->
+            <a href="tel:+33618334127" class="flex items-center gap-2 hover:brightness-125 transition">
+                <img src="phone-solid-24.png" alt="Téléphone" class="w-6 h-6 hover:scale-110 transition" />
+                <span>06 18 33 41 27</span>
             </a>
         </div>
+
         <p class="text-sm md:text-base">© 2024 Célia Scampini. Tous droits réservés.</p>
         <p class="text-xs mt-2 text-gray-400">Site réalisé avec passion — Portfolio interactif</p>
     </footer>
+
 
 </body>
 
